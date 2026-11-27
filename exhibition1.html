@@ -1,0 +1,457 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nation Looks to the Youth | LAKBAYAN</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background-color: #F5E6D3;
+            font-family: Arial, sans-serif;
+            color: #4A2C16;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 6%;
+            background-color: transparent;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: #F5E6D3;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #4A2C16;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #4A2C16;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #A66A3F;
+        }
+
+        /* Main Layout */
+        .content-layout {
+            max-width: 1250px;
+            margin: 110px auto 60px;
+            padding: 0 25px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Main Article */
+        .article {
+            background-color: white;
+            padding: 45px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .exhibition-label {
+            color: #A66A3F;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .article h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin: 0 0 20px;
+            color: #4A2C16;
+        }
+
+        .article-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .article p {
+            font-size: 19px;
+            line-height: 1.9;
+            margin-bottom: 22px;
+            text-align: justify;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-section {
+            background-color: white;
+            padding: 22px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .sidebar-section h2 {
+            font-size: 23px;
+            color: #4A2C16;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        /* Related Articles */
+        .related-article {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            text-decoration: none;
+            color: #4A2C16;
+            margin-bottom: 18px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #E5D8C8;
+        }
+
+        .related-article:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .related-article img {
+            width: 100px;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 7px;
+            flex-shrink: 0;
+        }
+
+        .related-article h3 {
+            font-size: 15px;
+            line-height: 1.4;
+            margin: 0 0 7px;
+        }
+
+        .related-article span {
+            font-size: 11px;
+            color: #A66A3F;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .related-article:hover h3 {
+            color: #A66A3F;
+        }
+
+        /* Related Facebook Links */
+        .facebook-posts {
+            background-color: white;
+            padding: 22px;
+            border-radius: 12px;
+            margin-top: 25px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .facebook-posts h2 {
+            font-size: 23px;
+            color: #4A2C16;
+            margin-top: 0;
+            margin-bottom: 18px;
+        }
+
+        .facebook-link-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #E5D8C8;
+        }
+
+        .facebook-link-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .facebook-link-item p {
+            font-size: 14px;
+            line-height: 1.7;
+            margin: 0 0 10px;
+            text-align: left;
+        }
+
+        .facebook-link-item a {
+            color: #1877F2;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .facebook-link-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #76543C;
+            font-size: 13px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 900px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .navbar {
+                padding: 17px 5%;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                gap: 17px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links a {
+                font-size: 13px;
+            }
+
+            .content-layout {
+                margin-top: 140px;
+                padding: 0 15px;
+            }
+
+            .article {
+                padding: 25px;
+            }
+
+            .article h1 {
+                font-size: 30px;
+            }
+
+            .article p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+
+        <a href="Arts Website.html" class="logo">LAKBAYAN</a>
+
+        <div class="nav-links">
+            <a href="Arts Website.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="destinations.html">Destinations</a>
+            <a href="gallery.html">Gallery</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Main Content -->
+    <main class="content-layout">
+
+        <!-- Article -->
+        <article class="article">
+
+            <div class="exhibition-label">EXHIBITION 01</div>
+
+            <h1>The Nation Looks to the Youth as Its Hope for the Future</h1>
+
+            <img src="news_1.jpg"
+                 alt="Youth and society"
+                 class="article-image">
+
+            <p>
+                "Ang kabataan ang pag-asa ng bayan." This is one of the most
+                familiar statements Filipinos hear when discussing the role
+                of young people in society. It reflects the belief that the
+                youth will eventually lead the country toward progress and
+                become responsible citizens who will shape its future.
+                Because of this, young people are often reminded of their
+                potential and the important responsibilities waiting for
+                them as they grow older.
+            </p>
+
+            <p>
+                However, what does it really mean to be the hope of the
+                nation? While young people are valued for what they may
+                contribute in the future, their contributions in the present
+                are sometimes overlooked. Their opinions may be considered
+                important only when they become older, more experienced, or
+                more established. The expectation that the youth will
+                eventually make a difference can sometimes take attention
+                away from the fact that they are already capable of
+                contributing today.
+            </p>
+
+            <p>
+                Young people are not simply individuals waiting for their
+                turn to make a difference. They are students who witness
+                the realities of their communities, young citizens who are
+                affected by political decisions, and individuals who are
+                continuously forming their understanding of the world.
+                Their hopes, questions, and concerns are already connected
+                to the future of the country. These experiences deserve to
+                be recognized rather than dismissed because of their age.
+            </p>
+
+            <p>
+                Calling the youth the hope of the nation should therefore
+                mean more than placing expectations on their shoulders.
+                It should also mean acknowledging their humanity, listening
+                to their perspectives, and allowing them to participate in
+                the society they are expected to inherit. After all, young
+                people should not have to wait until the future to prove
+                that they can already be part of meaningful change.
+            </p>
+
+        </article>
+
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <!-- More Articles -->
+            <div class="sidebar-section">
+
+                <h2>More Articles</h2>
+
+                <a href="exhibition2.html" class="related-article">
+
+                    <img src="news_2.jpg" alt="Exhibition 02">
+
+                    <div>
+                        <span>GALLERY 02</span>
+                        <h3>Youth Voices Rise Amid Doubts and Criticism</h3>
+                    </div>
+
+                </a>
+
+                <a href="exhibition3.html" class="related-article">
+
+                    <img src="news_3.jpg" alt="Exhibition 03">
+
+                    <div>
+                        <span>GALLERY 03</span>
+                        <h3>Young Filipinos Take Action Beyond the Promise of Tomorrow</h3>
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <!-- Related Facebook Posts -->
+            <div class="facebook-posts">
+
+                <h2>Related Facebook Posts</h2>
+
+                <div class="facebook-link-item">
+
+                    <p>
+                        A related discussion that offers another perspective
+                        on the role of young people in society and their
+                        contributions to the nation.
+                    </p>
+
+                    <a href="https://www.facebook.com/share/p/1CJRZZKmBB/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Read the Facebook Post →
+                    </a>
+
+                </div>
+
+
+                <div class="facebook-link-item">
+
+                    <p>
+                        An additional reference that connects to the issues,
+                        experiences, and perspectives explored in this
+                        exhibition.
+                    </p>
+
+                    <a href="https://www.facebook.com/share/p/1CNXbnbxt7/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        Read the Facebook Post →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer>
+        <p>LAKBAYAN | A Virtual Exhibition</p>
+    </footer>
+
+
+    <!-- Navigation Scroll Effect -->
+    <script>
+        const navbar = document.getElementById("navbar");
+
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+        });
+    </script>
+
+</body>
+</html>

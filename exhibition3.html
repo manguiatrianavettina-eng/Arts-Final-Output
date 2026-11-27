@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<title>Young Filipinos Take Action | LAKBAYAN</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background-color: #F5E6D3;
+        font-family: Arial, sans-serif;
+        color: #4A2C16;
+    }
+
+    /* NAVIGATION BAR */
+    .navbar {
+        background-color: transparent;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 100;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar.scrolled {
+        background-color: #F5E6D3;
+    }
+
+    .navbar .logo {
+        color: #4A2C16;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .navbar ul {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar ul li a {
+        color: #4A2C16;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .navbar ul li a:hover {
+        color: grey;
+    }
+
+    /* MAIN PAGE LAYOUT */
+    .page-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        align-items: start;
+        gap: 30px;
+        max-width: 1250px;
+        margin: 100px auto 50px;
+        padding: 20px;
+    }
+
+    /* ARTICLE */
+    .article-card {
+        background-color: white;
+        color: #4A2C16;
+        padding: 40px;
+        border-radius: 12px;
+        width: 100%;
+        line-height: 1.8;
+    }
+
+    .article-card h1 {
+        font-family: "Times New Roman", serif;
+        font-size: 32px;
+        line-height: 1.3;
+        margin-top: 0;
+    }
+
+    .article-card p {
+        text-align: justify;
+        margin-bottom: 20px;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 15px;
+        color: #4A2C16;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    /* RIGHT SIDEBAR */
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: sticky;
+        top: 85px;
+    }
+
+    .sidebar-section {
+        background-color: white;
+        padding: 22px;
+        border-radius: 12px;
+        color: #4A2C16;
+    }
+
+    .sidebar-title {
+        font-size: 13px;
+        letter-spacing: 2px;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+    }
+
+    /* MUSIC PLAYER */
+    .music-player {
+        text-align: center;
+    }
+
+    .music-player h3 {
+        margin-bottom: 5px;
+        font-size: 19px;
+    }
+
+    .artist {
+        font-size: 13px;
+        margin-top: 0;
+    }
+
+    #musicBtn {
+        background-color: #4A2C16;
+        color: #F5E6D3;
+        border: none;
+        border-radius: 50%;
+        width: 55px;
+        height: 55px;
+        font-size: 23px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+
+    #musicBtn:hover {
+        background-color: #704421;
+        transform: scale(1.08);
+    }
+
+    #musicBtn.playing {
+        box-shadow: 0 0 15px rgba(74, 44, 22, 0.5);
+    }
+
+    #musicStatus {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .youtube-link {
+        display: block;
+        font-size: 12px;
+        color: #4A2C16;
+        margin-top: 12px;
+    }
+
+    /* MORE EXHIBITIONS */
+    .exhibition-card {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 16px;
+        text-decoration: none;
+        color: #4A2C16;
+        transition: 0.3s;
+    }
+
+    .exhibition-card:last-child {
+        margin-bottom: 0;
+    }
+
+    .exhibition-card:hover {
+        transform: translateX(5px);
+    }
+
+    .exhibition-card img {
+        width: 85px;
+        height: 75px;
+        object-fit: cover;
+        border-radius: 6px;
+    }
+
+    .exhibition-info {
+        flex: 1;
+    }
+
+    .exhibition-label {
+        font-size: 10px;
+        letter-spacing: 1px;
+        font-weight: bold;
+        margin: 0 0 5px;
+    }
+
+    .exhibition-info h4 {
+        font-family: "Times New Roman", serif;
+        font-size: 15px;
+        line-height: 1.3;
+        margin: 0;
+    }
+
+    /* RELATED FACEBOOK POSTS */
+    .related-post {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(74, 44, 22, 0.2);
+    }
+
+    .related-post:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .related-post p {
+        font-size: 13px;
+        line-height: 1.5;
+        margin: 0 0 8px;
+    }
+
+    .related-post a {
+        font-size: 12px;
+        font-weight: bold;
+        color: #4A2C16;
+        text-decoration: none;
+    }
+
+    .related-post a:hover {
+        text-decoration: underline;
+    }
+
+    /* MOBILE RESPONSIVENESS */
+    @media (max-width: 850px) {
+        .page-layout {
+            grid-template-columns: 1fr;
+            margin: 90px auto 20px;
+        }
+
+        .sidebar {
+            position: static;
+        }
+
+        .article-card {
+            padding: 25px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .navbar {
+            padding: 15px;
+        }
+
+        .navbar ul {
+            gap: 12px;
+        }
+
+        .navbar ul li a {
+            font-size: 12px;
+        }
+
+        .navbar .logo {
+            font-size: 20px;
+        }
+
+        .article-card h1 {
+            font-size: 27px;
+        }
+    }
+
+    @media (max-width: 380px) {
+        .navbar {
+            padding: 12px 10px;
+        }
+
+        .navbar ul {
+            gap: 8px;
+        }
+
+        .navbar ul li a {
+            font-size: 10px;
+        }
+
+        .navbar .logo {
+            font-size: 17px;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="navbar">
+
+        <a href="Arts Website.html" class="logo">LAKBAYAN</a>
+
+        <ul>
+            <li><a href="Arts Website.html">Home</a></li>
+            <li><a href="Arts Website.html#about">About</a></li>
+            <li><a href="Arts Website.html#destinations">Destinations</a></li>
+            <li><a href="Arts Website.html#gallery">Gallery</a></li>
+        </ul>
+
+    </nav>
+
+
+    <!-- MAIN PAGE -->
+    <main class="page-layout">
+
+        <!-- ARTICLE -->
+        <article class="article-card">
+
+            <h1>Young Filipinos Take Action Beyond the Promise of Tomorrow</h1>
+
+            <p>
+                The future is often used to describe the importance of young people.
+                They are called future leaders, future professionals, and future
+                contributors to society. But while everyone speaks of what they
+                will become, their actions in the present can easily go unnoticed.
+                Young Filipinos are already creating, questioning, organizing,
+                expressing, and participating in the world around them. Their
+                contributions do not begin only when they reach a certain age or
+                receive a position of authority.
+            </p>
+
+            <p>
+                This idea is reflected in Taylor Swift's <i>Only the Young</i>,
+                which speaks to the frustrations and hopes of a younger generation
+                confronted by circumstances larger than themselves. Its message
+                resonates with the reality that young people are not unaware of
+                the world they live in. They witness inequality, experience the
+                consequences of political decisions, and recognize problems that
+                affect their communities. They may not always have the power to
+                make decisions, but they have ways of responding to them.
+            </p>
+
+            <p>
+                Sometimes, action begins with something as simple as creating and
+                sharing a message. A song can give words to feelings that others
+                struggle to express. A photograph can reveal realities that might
+                otherwise be ignored. An illustration can challenge familiar
+                perspectives, while a social media post can bring attention to
+                an issue beyond the limits of one's immediate community. These
+                are not separate from participation in society. They are among
+                the ways people communicate, connect, and make their presence felt.
+            </p>
+
+            <p>
+                The power of young people does not lie solely in what they might
+                accomplish someday. It can already be seen in the questions they
+                raise, the causes they support, the stories they share, and the
+                communities they stand with. Their actions may not immediately
+                transform the country, but that does not make them insignificant.
+                Change is not always the result of one person or one defining
+                moment. It can also grow through countless voices choosing to
+                be heard.
+            </p>
+
+            <p>
+                The youth are not waiting for tomorrow to become part of the
+                nation. They are already living in it, experiencing its realities,
+                and contributing to its direction. They should not have to prove
+                that they deserve a place in society by waiting until they are
+                older. If they are truly the <i>pag-asa ng bayan</i>, then their
+                voices, ideas, and actions deserve recognition now.
+            </p>
+
+            <a href="Arts Website.html" class="back-link">
+                ← Back to Home
+            </a>
+
+        </article>
+
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar">
+
+            <!-- MUSIC PLAYER -->
+            <section class="sidebar-section music-player">
+
+                <p class="sidebar-title">NOW PLAYING</p>
+
+                <h3>Only the Young</h3>
+
+                <p class="artist">Taylor Swift</p>
+
+                <button id="musicBtn" type="button">▶</button>
+
+                <p id="musicStatus">Press play to listen</p>
+
+                <p style="font-size: 11px;">
+                    Listen while exploring
+                </p>
+
+                <a
+                    class="youtube-link"
+                    href="https://www.youtube.com/watch?v=GJU-S1t2r1M"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Open song on YouTube
+                </a>
+
+            </section>
+
+
+            <!-- MORE EXHIBITIONS -->
+            <section class="sidebar-section">
+
+                <p class="sidebar-title">MORE EXHIBITIONS</p>
+
+                <a href="exhibition1.html" class="exhibition-card">
+
+                    <img src="news_1.jpg" alt="Exhibition 1">
+
+                    <div class="exhibition-info">
+
+                        <p class="exhibition-label">EXHIBITION 01</p>
+
+                        <h4>Explore Exhibition 01</h4>
+
+                    </div>
+
+                </a>
+
+
+                <a href="exhibition3.html" class="exhibition-card">
+
+                    <img src="news_3.jpg" alt="Exhibition 3">
+
+                    <div class="exhibition-info">
+
+                        <p class="exhibition-label">EXHIBITION 03</p>
+
+                        <h4>Explore Exhibition 03</h4>
+
+                    </div>
+
+                </a>
+
+            </section>
+
+
+            <!-- RELATED FACEBOOK POSTS -->
+            <section class="sidebar-section">
+
+                <p class="sidebar-title">RELATED POSTS</p>
+
+                <div class="related-post">
+
+                    <p>
+                        Explore a related Facebook post and discover more
+                        conversations connected to youth participation.
+                    </p>
+
+                    <a
+                        href="https://www.facebook.com/share/p/1CJRZZKmBB/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        View Post on Facebook →
+                    </a>
+
+                </div>
+
+
+                <div class="related-post">
+
+                    <p>
+                        Continue exploring discussions and perspectives
+                        surrounding young people's voices and actions.
+                    </p>
+
+                    <a
+                        href="https://www.facebook.com/share/p/1CNXbnbxt7/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        View Post on Facebook →
+                    </a>
+
+                </div>
+
+            </section>
+
+        </aside>
+
+    </main>
+
+
+    <!-- HIDDEN YOUTUBE PLAYER -->
+    <div id="ytPlayer"
+         style="width:200px; height:200px; position:absolute; left:-10000px;">
+    </div>
+
+
+    <!-- NAVIGATION SCRIPT -->
+    <script>
+
+        window.addEventListener("scroll", function() {
+
+            const navbar = document.querySelector(".navbar");
+
+            if (window.scrollY > 50) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+        });
+
+    </script>
+
+
+    <!-- MUSIC SCRIPT -->
+    <script>
+
+        const musicBtn = document.getElementById("musicBtn");
+        const musicStatus = document.getElementById("musicStatus");
+
+        let player = null;
+        let playerReady = false;
+        let musicPlaying = false;
+
+        // Load YouTube API
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+
+        // Initialize YouTube player
+        window.onYouTubeIframeAPIReady = function() {
+
+            player = new YT.Player("ytPlayer", {
+
+                width: "200",
+                height: "200",
+
+                videoId: "GJU-S1t2r1M",
+
+                playerVars: {
+                    autoplay: 0,
+                    controls: 0,
+                    playsinline: 1,
+                    enablejsapi: 1,
+                    origin: window.location.origin
+                },
+
+                events: {
+
+                    onReady: function() {
+                        playerReady = true;
+                        musicStatus.textContent = "Ready to play";
+                    },
+
+                    onStateChange: function(event) {
+
+                        if (event.data === YT.PlayerState.PLAYING) {
+
+                            musicPlaying = true;
+                            musicBtn.textContent = "Ⅱ";
+                            musicBtn.classList.add("playing");
+                            musicStatus.textContent = "Now playing";
+
+                        } else if (
+                            event.data === YT.PlayerState.PAUSED ||
+                            event.data === YT.PlayerState.ENDED
+                        ) {
+
+                            musicPlaying = false;
+                            musicBtn.textContent = "▶";
+                            musicBtn.classList.remove("playing");
+                            musicStatus.textContent = "Press play to listen";
+
+                        }
+
+                    },
+
+                    onError: function(event) {
+
+                        musicStatus.textContent =
+                            "Playback unavailable (error " + event.data + ")";
+
+                    }
+
+                }
+
+            });
+
+        };
+
+        // Play and pause
+        musicBtn.addEventListener("click", function() {
+
+            if (!playerReady || !player) {
+                musicStatus.textContent = "Player is still loading...";
+                return;
+            }
+
+            if (musicPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
